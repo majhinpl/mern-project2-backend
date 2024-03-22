@@ -1,0 +1,14 @@
+1. install all packages and dependences packages.
+
+npx tsc // transpile tsc file to js es6
+npm install sequelize mysql2
+npm install --save-dev @types-sequelize 
+npm install tsc-node // to run the ts files
+npm i rimraf // to remove the files
+
+2. create config files.
+database config
+
+3. create model
+mysql2 port= 3306
+
