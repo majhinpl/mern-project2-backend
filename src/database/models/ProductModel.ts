@@ -26,12 +26,12 @@ class Product extends Model {
   @Column({
     type: DataType.STRING,
   })
-  declare decription: string;
+  declare description: string;
 
   @Column({
-    type: DataType.STRING,
+    type: DataType.DECIMAL(10, 2), // Adjust precision and scale as needed
   })
-  declare price: string;
+  declare price: number;
 
   @Column({
     type: DataType.STRING,

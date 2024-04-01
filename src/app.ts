@@ -1,23 +1,25 @@
-import express, { Application, Request, Response } from "express";
-const app = express();
-const PORT: number = 3000;
-
-// dotnet  imports
+import express, { Application } from "express";
 import * as dotenv from "dotenv";
-dotenv.config();
-
-// Databse file imports
-import "./database/connection";
-
-app.use(express.json());
-
 import userRoute from "./routes/userRoute";
 import productRoute from "./routes/productRoute";
+import { upload } from "./middleware/multerConfig"; // Import only the upload instance
 
-// routes imports
+dotenv.config();
+
+const app: Application = express();
+const PORT: number = 3000;
+
+// Middleware for parsing JSON body
+app.use(express.json());
+
+// Mounting multer middleware for file uploads
+app.use(upload.single("image")); // Use the upload instance
+
+// Routes
 app.use("", userRoute);
 app.use("", productRoute);
 
+// Starting the server
 app.listen(PORT, () => {
   console.log("Server has started at port", PORT);
 });

@@ -1,23 +1,16 @@
-import {Configuration} from "@tsed/common";
-import "@tsed/multipartfiles";
-import "@tsed/platform-express";
+import multer from "multer";
 
-const rootDir = __dirname;
-
-@Configuration({
-  rootDir,
-  mount: {
-    "/rest": `${rootDir}/controllers/**/**.js`
+// Define multer storage configuration
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "./src/storage"); // Save uploaded files to the 'uploads' directory
   },
-  uploadDir: `${rootDir}/storage`,
-  componentsScan: [
-    `${rootDir}/services/**/**.js`
-  ],
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + "-" + file.originalname); // Generate unique filename
+  },
+});
 
-  multer: {
-    // see multer options
-  }
-})
-export class Server {
+// Initialize multer middleware with the defined storage configuration
+const upload = multer({ storage: storage });
 
-}
+export { upload }; // Export only the upload instance
