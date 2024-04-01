@@ -12,3 +12,14 @@ database config
 3. create model
 mysql2 port= 3306
 
+
+MVC pattern
+// database related file includes in model folder
+
+// UI related files includes in views folder
+
+// logic related files includes in controller folder
+
+MCR / MVCR
+
+
