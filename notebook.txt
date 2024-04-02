@@ -6,6 +6,8 @@ npm install --save-dev @types-sequelize
 npm install tsc-node // to run the ts files
 npm i rimraf // to remove the files
 
+npm i
+
 2. create config files.
 database config
 

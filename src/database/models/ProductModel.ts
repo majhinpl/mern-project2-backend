@@ -19,6 +19,12 @@ class Product extends Model {
   declare id: string;
 
   @Column({
+    type: DataType.ENUM("customer", "admin"),
+    defaultValue: "customer",
+  })
+  declare role: string;
+
+  @Column({
     type: DataType.STRING,
   })
   declare productName: string;

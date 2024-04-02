@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import Product from "../database/models/ProductModel";
-import { upload } from "../middleware/multerConfig";
 
 class ProductController {
   public static async createProduct(

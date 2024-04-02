@@ -2,6 +2,7 @@ import express, { Application } from "express";
 import * as dotenv from "dotenv";
 import userRoute from "./routes/userRoute";
 import productRoute from "./routes/productRoute";
+import "./database/connection"
 import { upload } from "./middleware/multerConfig"; // Import only the upload instance
 
 dotenv.config();
