@@ -1,14 +1,9 @@
-import {
-  Table,
-  Column,
-  Model,
-  DataType,
-  CreatedAt,
-} from "sequelize-typescript";
+import { Table, Column, Model, DataType } from "sequelize-typescript";
 
 @Table({
   tableName: "products",
   modelName: "Product",
+  timestamps: true,
 })
 class Product extends Model {
   @Column({
@@ -20,23 +15,29 @@ class Product extends Model {
 
   @Column({
     type: DataType.STRING,
+    allowNull: false,
   })
   declare productName: string;
 
   @Column({
-    type: DataType.STRING,
+    type: DataType.TEXT,
   })
-  declare description: string;
+  declare productDescription: string;
 
   @Column({
-    type: DataType.DECIMAL(10, 2), // Adjust precision and scale as needed
+    type: DataType.INTEGER,
   })
-  declare price: number;
+  declare productPrice: number;
+
+  @Column({
+    type: DataType.INTEGER,
+  })
+  declare productTotalStockQty: number;
 
   @Column({
     type: DataType.STRING,
   })
-  declare imgUrl: string;
+  declare productImageUrl: string;
 }
 
 export default Product;

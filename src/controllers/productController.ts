@@ -2,40 +2,43 @@ import { Request, Response } from "express";
 import Product from "../database/models/ProductModel";
 
 class ProductController {
-  public static async createProduct(
-    req: Request,
-    res: Response
-  ): Promise<void> {
-    // Extract product data from request body
-    const { productName, description, price } = req.body;
-
-    // Check if all required fields are provided
-    if (!productName || !description || !price || !req.file) {
+  async addProduct(req: Request, res: Response): Promise<void> {
+    const {
+      productName,
+      productDescription,
+      productTotalStockQty,
+      productPrice,
+    } = req.body;
+    let fileName;
+    if (req.file) {
+      fileName = req.file?.filename;
+    } else {
+      fileName =
+        "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aGVhZHBob25lfGVufDB8fDB8fHww";
+    }
+    if (
+      !productName ||
+      !productDescription ||
+      !productTotalStockQty ||
+      !productPrice
+    ) {
       res.status(400).json({
-        message: "Please fill all the required fields and upload an image",
+        message:
+          "Please provide productName,,productDescription,productTotalStockQty,productPrice",
       });
       return;
     }
-
-    // Construct product object with file URL
-    const productData = {
+    await Product.create({
       productName,
-      description,
-      price,
-      imgUrl: req.file.path, // Store the path of the uploaded file
-    };
-
-    try {
-      // Create new product in the database
-      await Product.create(productData);
-      res.status(200).json({ message: "Product created successfully" });
-    } catch (error: any) {
-      // Define the type of the error object explicitly
-      res
-        .status(500)
-        .json({ message: "Error creating product", error: error.message });
-    }
+      productDescription,
+      productPrice,
+      productTotalStockQty,
+      productImageUrl: fileName,
+    });
+    res.status(200).json({
+      message: "Product added successfully",
+    });
   }
 }
 
-export default ProductController;
+export default new ProductController();

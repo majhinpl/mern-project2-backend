@@ -25,3 +25,19 @@ MVC pattern
 MCR / MVCR
 
 
+Day32 
+// admin seeder created
+
+Day33
+// filter the admin and customer to add product
+
+// request middleware to check authenticated or not
+
+// middleware to check the role of user hitting api
+
+
+Relationships in sequelize
+user, Product connect
+cate
+
+
